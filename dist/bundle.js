@@ -10362,6 +10362,11 @@
 	}
 
 	function renderApp(input, todoList, filters) {
+
+	    if ((0, _feature.isEnabled)('filter') && (0, _feature.isEnabled)('renderBottom') && (0, _feature.isEnabled)('filterTop')) {
+	        return filters + renderAddTodoAtBottom(input, todoList);
+	    }
+
 	    var appContent = "";
 
 	    if ((0, _feature.isEnabled)('renderBottom')) {

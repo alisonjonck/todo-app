@@ -21,6 +21,11 @@ export function render(el, state) {
 }
 
 function renderApp(input, todoList, filters) {
+    
+    if (isEnabled('filter') && isEnabled('renderBottom') && isEnabled('filterTop')) {
+        return filters + renderAddTodoAtBottom(input, todoList);
+    }
+
     var appContent = "";
 
     if (isEnabled('renderBottom')) {
