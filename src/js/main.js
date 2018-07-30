@@ -1,10 +1,10 @@
 import '../css/main.css';
 
-import {todos} from './state';
+import todos from './store';
 import {render} from './view';
 import {registerEventHandlers} from './events';
 
-todos.subscribe(newState => render(document.body, newState));
+todos.subscribe(() => render(document.body, todos.getState()));
 
 render(document.body, todos.getState());
 
