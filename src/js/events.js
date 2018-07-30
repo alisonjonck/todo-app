@@ -1,6 +1,6 @@
 import { todos } from './state';
 import { listen } from './lib/events';
-import { addTodo, toggleTodoState } from './actions';
+import { addTodo, toggleTodoState, setFilter } from './actions';
 
 const addTodoHandler = event => {
     const todoInput = document.getElementById('todoInput');
@@ -24,5 +24,16 @@ export function registerEventHandlers() {
         if (event.key === 'Enter') {
             addTodoHandler(event);
         }
+    });
+
+    // Filtros
+    listen('click', '#radio_all', event => {
+        todos.dispatch(setFilter('all'));
+    });
+    listen('click', '#radio_done', event => {
+        todos.dispatch(setFilter('done'));
+    });
+    listen('click', '#radio_open', event => {
+        todos.dispatch(setFilter('open'));
     });
 }
