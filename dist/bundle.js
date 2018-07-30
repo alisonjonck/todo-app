@@ -10409,15 +10409,17 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var dispatchAddTodo = function dispatchAddTodo(event) {
+	var addTodoHandler = function addTodoHandler(event) {
 	    var todoInput = document.getElementById('todoInput');
 	    _state.todos.dispatch((0, _actions.addTodo)(todoInput.value));
 	    event.stopPropagation();
+
+	    document.getElementById("todoInput").focus();
 	};
 
 	function registerEventHandlers() {
 	    (0, _events.listen)('click', '#addTodo', function (event) {
-	        dispatchAddTodo(event);
+	        addTodoHandler(event);
 	    });
 
 	    (0, _events.listen)('click', '.js_toggle_todo', function (event) {
@@ -10427,7 +10429,7 @@
 
 	    (0, _events.listen)('keyup', '#todoInput', function (event) {
 	        if (event.key === 'Enter') {
-	            dispatchAddTodo(event);
+	            addTodoHandler(event);
 	        }
 	    });
 	}
