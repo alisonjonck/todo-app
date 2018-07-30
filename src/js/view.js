@@ -1,19 +1,39 @@
-import {isEnabled} from './lib/feature';
+import { isEnabled } from './lib/feature';
+
+const getFilteredTodos = (state) => {
+    switch (state.filter) {
+        case 'done':
+            return state.todos.filter(todo => todo.done);
+        case 'open':
+            return state.todos.filter(todo => !todo.done);
+        default:
+            return state.todos;
+    }
+}
 
 export function render(el, state) {
-    const todoItems = state.todos.map(renderTodoItem).join('');
+    const todoItems = getFilteredTodos(state).map(renderTodoItem).join('');
     el.innerHTML = renderApp(
         renderInput(),
-        renderTodos(todoItems)
+        renderTodos(todoItems),
+        renderFilters(state.filter)
     );
 }
 
-function renderApp(input, todoList) {
-    if(isEnabled('renderBottom')) {
-        return renderAddTodoAtBottom(input, todoList);
+function renderApp(input, todoList, filters) {
+    var appContent = "";
+
+    if (isEnabled('renderBottom')) {
+        appContent = renderAddTodoAtBottom(input, todoList);
     } else {
-        return renderAddTodoAtTop(input, todoList);
+        appContent = renderAddTodoAtTop(input, todoList);
     }
+
+    if (isEnabled('filter')) {
+        appContent += filters;
+    }
+
+    return appContent;
 }
 
 function renderAddTodoAtTop(input, todoList) {
@@ -44,4 +64,19 @@ function renderTodoItem(todo) {
         <input class="js_toggle_todo" type="checkbox" data-id="${todo.id}"${todo.done ? ' checked' : ''}>
         ${todo.text}
     </li>`;
+}
+
+function renderFilters(filter) {
+    const all = `<input type="radio" id="radio_all" name="filter-todo" ${filter == "all" ? "checked" : ""}> 
+    <label for="radio_all"> Mostrar todos </label>`;
+    const open = `<input type="radio" id="radio_open" name="filter-todo" ${filter == "open" ? "checked" : ""}> 
+    <label for="radio_open"> Somente abertos </label>`;
+    const done = `<input type="radio" id="radio_done" name="filter-todo" ${filter == "done" ? "checked" : ""}>
+    <label for="radio_done"> Somente fechados </label>`;
+
+    return `<div>
+        ${all}
+        ${open}
+        ${done}
+    </div>`;
 }
