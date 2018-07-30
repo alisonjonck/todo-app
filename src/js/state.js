@@ -1,4 +1,4 @@
-import {createStore} from './lib/state';
+import { createStore } from './lib/state';
 
 const initialState = {
     todos: [
@@ -27,7 +27,7 @@ const initialState = {
 };
 
 function todoChangeHandler(state, change) {
-    switch(change.type) {
+    switch (change.type) {
         case 'ADD_TODO':
             state.todos.push({
                 id: state.todos.length,
@@ -36,17 +36,29 @@ function todoChangeHandler(state, change) {
             });
             break;
         case 'TODO_TOGGLE_DONE':
-            for(let todo of state.todos) {
-                if(todo.id === change.id) {
+            for (let todo of state.todos) {
+                if (todo.id === change.id) {
                     todo.done = !todo.done;
                     break;
                 }
             }
             break;
         case 'SET_FILTER':
-            state.filter = change.filter
+            state.filter = change.filter;
             break;
     }
+
+    localStorage.setItem('savedTodos', JSON.stringify(state.todos));
 }
 
-export const todos = createStore(todoChangeHandler, initialState);
+var localStorageTodos = initialState;
+try {
+    var storedTodos = JSON.parse(localStorage.getItem('savedTodos'));
+    if (storedTodos.length > 0) {
+        localStorageTodos.todos = JSON.parse(localStorage.getItem('savedTodos'));
+    }
+} catch (error) {
+
+}
+
+export const todos = createStore(todoChangeHandler, localStorageTodos);
