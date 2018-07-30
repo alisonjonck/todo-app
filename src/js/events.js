@@ -2,15 +2,17 @@ import { todos } from './state';
 import { listen } from './lib/events';
 import { addTodo, toggleTodoState } from './actions';
 
-const dispatchAddTodo = event => {
+const addTodoHandler = event => {
     const todoInput = document.getElementById('todoInput');
     todos.dispatch(addTodo(todoInput.value));
     event.stopPropagation();
+
+    document.getElementById("todoInput").focus();
 };
 
 export function registerEventHandlers() {
     listen('click', '#addTodo', event => {
-        dispatchAddTodo(event);
+        addTodoHandler(event);
     });
 
     listen('click', '.js_toggle_todo', event => {
@@ -20,7 +22,7 @@ export function registerEventHandlers() {
 
     listen('keyup', '#todoInput', event => {
         if (event.key === 'Enter') {
-            dispatchAddTodo(event);
+            addTodoHandler(event);
         }
     });
 }
