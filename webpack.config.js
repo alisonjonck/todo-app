@@ -1,28 +1,43 @@
-var path = require('path');
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: ['babel-polyfill', path.normalize(__dirname + '/src/js/main')],
-    devtool: 'cheap-module-source-map',
+    entry: './src/main.js',
     output: {
         filename: 'bundle.js',
-        path: path.join(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist')
     },
     module: {
-        loaders: [
+        rules: [
             {
-                loader: 'babel-loader',
-                test: /\.js$/,
-                include: [path.resolve(__dirname, 'src', 'js')],
-                query: {
-                    plugins: ['transform-runtime'],
-                    presets: ['es2015']
-                }
+                test: /\.css$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: '../'
+                        }
+                    },
+                    'css-loader'
+                ]
             },
             {
-                loader: 'style!css',
-                test: /\.css$/,
-                include: [path.resolve(__dirname, 'src', 'css')]
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
+                }
             }
         ]
-    }
+    },
+    plugins: [
+        new CleanWebpackPlugin(['dist']),
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: "[name].css",
+            chunkFilename: "[id].css"
+        })
+    ]
 };
