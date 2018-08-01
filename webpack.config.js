@@ -1,5 +1,7 @@
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
@@ -7,6 +9,16 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
+    },
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: true // set to true if you want JS source maps
+            }),
+            new OptimizeCSSAssetsPlugin({})
+        ]
     },
     module: {
         rules: [
@@ -34,10 +46,8 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
             filename: "[name].css",
             chunkFilename: "[id].css"
-        })
+          })
     ]
 };
