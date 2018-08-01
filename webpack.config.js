@@ -3,12 +3,19 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/main.js',
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
+    },
+    devtool: 'inline-source-map',
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        hot: true
     },
     optimization: {
         minimizer: [
@@ -23,16 +30,12 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
+                test: /\.css/,
                 use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            publicPath: '../'
-                        }
-                    },
-                    'css-loader'
-                ]
+                    'css-hot-loader',
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                ],
             },
             {
                 test: /\.js$/,
@@ -48,6 +51,10 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "[name].css",
             chunkFilename: "[id].css"
-          })
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'Simple List app'
+        })
     ]
 };
