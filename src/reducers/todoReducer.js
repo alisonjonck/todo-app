@@ -1,30 +1,32 @@
 const todoReducer = (state = [], action) => {
-    
+    var newState;
+
     switch (action.type) {
         case 'ADD_TODO':
-            return [...state,
+            newState = [...state,
             {
                 id: state.length,
                 text: action.text,
                 done: false
             }];
+            break;
 
         case 'TODO_TOGGLE_DONE':
-            const newState = [...state];
+            newState = [...state];
             for (let todo of newState) {
-                for (let todo of newState) {
-                    if (todo.id === action.id) {
-                        todo.done = !todo.done;
-                        return newState;
-                    }
-                };
+                if (todo.id === action.id) {
+                    todo.done = !todo.done;
+                    break;
+                }
             }
-            
-            return newState;
+            break;
 
         default:
             return state;
     }
+
+    localStorage.setItem('savedTodos', JSON.stringify(newState));
+    return newState;
 };
 
 export default todoReducer;
