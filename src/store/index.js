@@ -1,7 +1,7 @@
 import { createStore, combineReducers } from 'redux';
 
-import filterReducer from './reducers/filterReducer';
-import todoReducer from './reducers/todoReducer';
+import filterReducer from '../reducers/filterReducer';
+import todoReducer from '../reducers/todoReducer';
 
 const initialState = {
     todos: [
