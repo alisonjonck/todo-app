@@ -65,6 +65,9 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "./src/index.html",
             filename: "./index.html"
+        }),
+        new webpack.DefinePlugin({
+            'ENABLE_FILTER_TEST': JSON.stringify(false)
         })
     ]
 };
