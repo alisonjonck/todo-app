@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setFilter } from '../actions/index';
 
+import './TodoFilter.css';
+
 const mapStateToProps = state => {
     return { filter: state.filter };
 }
@@ -24,6 +26,8 @@ class ConnectedTodoFilter extends Component {
     handleFilterChange(event) {
         this.setState({ filter: event.target.value });
         this.props.setFilter(event.target.value);
+
+        document.getElementById("todoInput").focus();
     }
 
     render() {

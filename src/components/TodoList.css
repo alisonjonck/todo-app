@@ -1,0 +1,15 @@
+ul.todo>li {
+    margin-top: 10px;
+}
+
+.todo {
+    list-style-type: none;
+}
+
+.todo__item {
+    margin: 10px;
+}
+
+.todo__item--done {
+    text-decoration: line-through;
+}
