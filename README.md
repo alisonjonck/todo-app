@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/alisonjonck/todo-app.svg?branch=master)](https://travis-ci.org/alisonjonck/todo-app) 
 
+Live Demo: https://quirky-northcutt-652f57.netlify.com/
+
 ## Requirements
 
 - Node.js (recommended: 4.x)
