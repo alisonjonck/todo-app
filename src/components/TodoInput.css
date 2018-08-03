@@ -1,0 +1,19 @@
+#todoInput {
+    width: 300px;
+}
+
+.todo__input {
+    margin: 10px;
+}
+
+#addTodo {
+    background: #008b8b;
+    color: #fff;
+    margin-left: 10px;
+    padding: 6px;
+    border: 1px solid #004444;
+    cursor: pointer;
+}
+#addTodo:hover {
+    background: #044;
+}

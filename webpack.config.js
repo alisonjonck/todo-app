@@ -67,7 +67,7 @@ module.exports = {
             filename: "./index.html"
         }),
         new webpack.DefinePlugin({
-            'ENABLE_FILTER_TEST': JSON.stringify(false)
+            'ENABLE_FILTER_TEST': JSON.stringify(true)
         })
     ]
 };

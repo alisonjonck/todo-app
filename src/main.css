@@ -3,19 +3,15 @@ html, body, .todo {
     padding: 0;
 }
 
-.todo {
-    list-style-type: none;
+#title {
+    color: darkcyan;
+    display: flex;
+    justify-content: center;
 }
 
-.todo__input, .todo__item {
-    margin: 10px;
+#app{
+    display: flex;
+    justify-content: center;
 }
 
-.todo__item--done {
-    text-decoration: line-through;
-}
-
-#addTodo {
-    margin-left: 10px;
-}
  

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addTodo } from '../actions/index';
 
+import './TodoInput.css';
+
 const mapDispatchToProps = dispatch => {
     return {
         addTodo: todo => dispatch(addTodo(todo))
@@ -15,6 +17,10 @@ class ConnectedTodoInput extends Component {
 
         this.handleTodoChange = this.handleTodoChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        document.getElementById("todoInput").focus();
     }
 
     handleSubmit(event) {

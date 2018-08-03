@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toggleTodoState } from '../actions/index';
 
+import './TodoList.css';
+
 const mapStateToProps = state => {
     return { todos: state.todos, filter: state.filter };
 }
@@ -37,7 +39,7 @@ class ConnectedTodoList extends Component {
         return (
             <ul className="todo">
                 {this.getFilteredTodos().map(todo => {
-                    const todoClassItem = "todo__item todo__item--" + todo.done ? "done" : "open";
+                    const todoClassItem = `todo__item todo__item--${todo.done ? "done" : "open"}`;
 
                     return <li key={todo.id} className={todoClassItem}>
                         <label onClick={() => this.handleToggleChange(todo.id)} style={{ textDecoration: todo.done ? 'line-through' : 'none' }}>
