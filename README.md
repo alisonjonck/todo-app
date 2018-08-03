@@ -9,8 +9,8 @@
 
 ## Install
 
-    $ git clone https://github.com/ORG/PROJECT.git
-    $ cd PROJECT
+    $ git clone https://github.com/alisonjonck/todo-app
+    $ cd todo-app
     $ npm install
 
 ## Run tests
