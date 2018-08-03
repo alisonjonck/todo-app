@@ -9,8 +9,8 @@
 
 ## Install
 
-    $ git clone https://github.com/alisonjonck/todo-app
-    $ cd todo-app
+    $ git clone https://github.com/ORG/PROJECT.git
+    $ cd PROJECT
     $ npm install
 
 ## Run tests
@@ -24,3 +24,18 @@
 ## Simple build for production
 
     $ npm run build
+
+## Config tests
+
+Enable or disable `TEST` for `#filter` setting. Change `ENABLE_FILTER_TEST` to true or false at `webpack.config.js`.
+
+```js
+{
+    plugins: [
+        ...,
+        new webpack.DefinePlugin({
+            'ENABLE_FILTER_TEST': JSON.stringify(true)
+        })
+    ]
+}
+```
