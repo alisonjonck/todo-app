@@ -4,10 +4,16 @@
 
 Live Demo: https://quirky-northcutt-652f57.netlify.com/
 
-## Requirements
+## Application Requirements
 
 - Node.js (recommended: 4.x)
 - npm (recommended: 2.x or 3.x)
+
+## Run it on Docker using nginx
+- Build a image called react-nginx for example:
+    $ docker build -t react-nginx .
+- Then run a new container using it:
+    $ docker run --rm -it -p 8080:80 react-nginx
 
 ## Install
 
